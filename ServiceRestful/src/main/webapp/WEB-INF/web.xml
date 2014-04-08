@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <display-name>Created Web Application</display-name>
+
+    <servlet>
+        <servlet-name>Rest</servlet-name>
+        <servlet-class>
+            com.jaxrs.vendor.JaxrsVendorServlet </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>
+                com.​creditcloud.​servicerestful.​service.ShoppingApplication </param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Rest</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
