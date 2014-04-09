@@ -1,1 +1,1 @@
-A Test program for resful webservice!
+A Test program for Resful WebService!
