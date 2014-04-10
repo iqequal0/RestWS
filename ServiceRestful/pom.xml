@@ -82,6 +82,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.14.v20131031</version>
 
+
                 <configuration>
                     <!-- By default the artifactId is taken, override it with something simple -->
                     <contextPath>/</contextPath>
@@ -90,7 +91,7 @@
                     <stopPort>9999</stopPort>
                     <connectors>
                         <connector
-                            implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>9095</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>

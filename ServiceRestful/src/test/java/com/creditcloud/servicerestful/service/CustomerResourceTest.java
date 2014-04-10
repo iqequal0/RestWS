@@ -20,9 +20,9 @@ import org.junit.runners.JUnit4;
  * @author sobranie
  */
 @RunWith(JUnit4.class)
-public class CustomerResourceServiceTest {
+public class CustomerResourceTest {
 
-    public CustomerResourceServiceTest() {
+    public CustomerResourceTest() {
     }
 
     @Test

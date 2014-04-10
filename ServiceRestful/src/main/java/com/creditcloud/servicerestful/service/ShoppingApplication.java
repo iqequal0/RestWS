@@ -7,21 +7,16 @@ package com.creditcloud.servicerestful.service;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-/**
- *
- * @author sobranie
- */
-@ApplicationPath("/customers")
 public class ShoppingApplication extends Application {
 
     private final Set<Object> singletons = new HashSet<>();
-    private final Set<Class<?>> empty = new HashSet<>();
+    private final Set<Class<?>> empty;
 
     public ShoppingApplication() {
-        singletons.add(new CustomerResourceService());
+        this.empty = new HashSet<>();
+        singletons.add(new CustomerResource());
     }
 
     @Override
@@ -33,5 +28,4 @@ public class ShoppingApplication extends Application {
     public Set<Object> getSingletons() {
         return singletons;
     }
-
 }
