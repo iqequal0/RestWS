@@ -30,8 +30,12 @@ import org.w3c.dom.NodeList;
  */
 public class CustomerResourceService implements CustomerResource {
 
-    private final Map<Integer, Customer> customerDB = new ConcurrentHashMap<>();
+    private final Map<Integer, Customer> customerDB;
     private final AtomicInteger idCounter = new AtomicInteger();
+
+    public CustomerResourceService() {
+        this.customerDB = new ConcurrentHashMap<>();
+    }
 
     @Override
     public Response createCustomer(InputStream is) {

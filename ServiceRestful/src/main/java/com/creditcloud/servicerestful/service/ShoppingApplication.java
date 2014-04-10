@@ -7,12 +7,14 @@ package com.creditcloud.servicerestful.service;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
  *
  * @author sobranie
  */
+@ApplicationPath("/customers")
 public class ShoppingApplication extends Application {
 
     private final Set<Object> singletons = new HashSet<>();

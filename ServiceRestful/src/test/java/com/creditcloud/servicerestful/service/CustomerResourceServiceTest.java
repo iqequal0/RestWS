@@ -6,11 +6,9 @@
 package com.creditcloud.servicerestful.service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,54 +25,42 @@ public class CustomerResourceServiceTest {
     public CustomerResourceServiceTest() {
     }
 
-    /**
-     * Test of createCustomer method, of class CustomerResourceService.
-     *
-     * @throws java.net.MalformedURLException
-     */
     @Test
-    public void testCreateCustomer() throws MalformedURLException, IOException {
-        System.out.println("*** Create a new Customer ***"); // Create a new customer
+    public void testCustomerResource() throws Exception {
+        System.out.println("*** Create a new Customer ***");
+        // Create a new customer
         String newCustomer = "<customer>"
                 + "<first-name>Bill</first-name>"
                 + "<last-name>Burke</last-name>"
-                + "<street>256 Clarendon Street</street>" + "<city>Boston</city>"
+                + "<street>256 Clarendon Street</street>"
+                + "<city>Boston</city>"
                 + "<state>MA</state>"
                 + "<zip>02115</zip>"
                 + "<country>USA</country>"
                 + "</customer>";
+
         URL postUrl = new URL("http://localhost:9095/customers");
-        HttpURLConnection connection
-                = (HttpURLConnection) postUrl.openConnection();
+        HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
         connection.setDoOutput(true);
         connection.setInstanceFollowRedirects(false);
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type",
-                "application/xml");
+        connection.setRequestProperty("Content-Type", "application/xml");
         OutputStream os = connection.getOutputStream();
         os.write(newCustomer.getBytes());
         os.flush();
         Assert.assertEquals(HttpURLConnection.HTTP_CREATED, connection.getResponseCode());
-        System.out.println("Location: "
-                + connection.getHeaderField("Location"));
+        System.out.println("Location: " + connection.getHeaderField("Location"));
         connection.disconnect();
-    }
 
-    /**
-     * Test of getCustomer method, of class CustomerResourceService.
-     *
-     * @throws java.net.MalformedURLException
-     */
-    @Test
-    public void testGetCustomer() throws MalformedURLException, IOException {
         // Get the new customer
         System.out.println("*** GET Created Customer **");
         URL getUrl = new URL("http://localhost:9095/customers/1");
-        HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
+        connection = (HttpURLConnection) getUrl.openConnection();
         connection.setRequestMethod("GET");
-        System.out.println("Content-Type: "
-                + connection.getContentType());
+        System.out.println("Content-Type: " + connection.getContentType());
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
         String line = reader.readLine();
         while (line != null) {
             System.out.println(line);
@@ -82,30 +68,22 @@ public class CustomerResourceServiceTest {
         }
         Assert.assertEquals(HttpURLConnection.HTTP_OK, connection.getResponseCode());
         connection.disconnect();
-    }
 
-    /**
-     * Test of updateCustomer method, of class CustomerResourceService.
-     *
-     * @throws java.net.MalformedURLException
-     */
-    @Test
-    public void testUpdateCustomer() throws MalformedURLException, IOException {
         // Update the new customer. Change Bill's name to William
         String updateCustomer = "<customer>"
                 + "<first-name>William</first-name>"
                 + "<last-name>Burke</last-name>"
-                + "<street>256 Clarendon Street</street>" + "<city>Boston</city>"
+                + "<street>256 Clarendon Street</street>"
+                + "<city>Boston</city>"
                 + "<state>MA</state>"
                 + "<zip>02115</zip>"
                 + "<country>USA</country>"
                 + "</customer>";
-        URL getUrl = new URL("http://localhost:9095/customers/1");
-        HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
+        connection = (HttpURLConnection) getUrl.openConnection();
         connection.setDoOutput(true);
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/xml");
-        OutputStream os = connection.getOutputStream();
+        os = connection.getOutputStream();
         os.write(updateCustomer.getBytes());
         os.flush();
         Assert.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, connection.getResponseCode());
@@ -115,10 +93,11 @@ public class CustomerResourceServiceTest {
         System.out.println("**** After Update ***");
         connection = (HttpURLConnection) getUrl.openConnection();
         connection.setRequestMethod("GET");
-        System.out.println("Content-Type: "
-                + connection.getContentType());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String line = reader.readLine();
+
+        System.out.println("Content-Type: " + connection.getContentType());
+        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+        line = reader.readLine();
         while (line != null) {
             System.out.println(line);
             line = reader.readLine();
@@ -126,5 +105,4 @@ public class CustomerResourceServiceTest {
         Assert.assertEquals(HttpURLConnection.HTTP_OK, connection.getResponseCode());
         connection.disconnect();
     }
-
 }
