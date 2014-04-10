@@ -6,6 +6,11 @@ jetty-maven-config location: http://www.eclipse.org/jetty/documentation/current/
 config location. 
 https://docs.jboss.org/resteasy/2.0.0.GA/userguide/html/Installation_Configuration.html
 
+Jetty location:
+http://www.eclipse.org/jetty/documentation/
+
+
+
 
 
 
